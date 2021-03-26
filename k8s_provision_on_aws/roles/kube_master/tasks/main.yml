@@ -32,14 +32,14 @@
      enabled: yes
   loop:
         - kubelet
-        - podman
+        - docker
         
 - name: "Pulling the config images"
   shell: kubeadm config images pull
 
 - name: "Confuring the docker daemon.json file"
   copy:
-     dest: /etc/podman/daemon.json
+     dest: /etc/docker/daemon.json
      src: daemon.json
      
 - name: "Restarting the docker service"
