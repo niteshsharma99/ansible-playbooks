@@ -1,0 +1,15 @@
+#!/usr/bin/ansible-playbook
+
+---
+ - name: example of debug module
+   hosts: localhost
+   tasks:
+     - name: printing the value of msg
+       debug:
+         msg:
+          - "this is my first playbook"
+          - "welcome to ansible worle"
+          - "these are the basic concept"
+       debug:
+#        msg: "the host name is {{inventory_hostname}}"
+         var: inventory_hostname

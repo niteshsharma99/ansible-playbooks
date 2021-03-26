@@ -1,0 +1,9 @@
+---
+  - name: simple play to install multiple pkgs 
+    hosts: all
+    become: true
+    gather_facts: true
+    tasks: 
+      - include_tasks: install_webserver_{{ansible_os_family}}.yml
+      - include_tasks: install_java_{{ansible_os_family}}.yml
+  

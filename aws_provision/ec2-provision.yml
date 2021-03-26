@@ -1,0 +1,27 @@
+---
+  - name: sample play to lunch ec2 instance
+    hosts: localhost
+    vars_files:
+         - aws_cred.yml
+    connection: local
+    gather_facts: false
+    tasks: 
+      - name: simple task to lunch ec2 instance with default
+        ec2:
+          aws_access_key: "{{ access_key }}"
+          aws_secret_key: "{{ secret_key }}"
+          key_name: ansible-key
+          instance_type: t2.micro
+          image: ami-0a9d27a9f4f5c0efc 
+          region: ap-south-1
+          group: launch-wizard-1
+          count: 1
+          wait: yes
+          wait_timeout: 50
+          state: present
+          monitoring: yes
+          instance_tags: 
+            name: prod-Instance
+          vpc_subnet_id: subnet-3a377c76
+          assign_public_ip: yes
+                    

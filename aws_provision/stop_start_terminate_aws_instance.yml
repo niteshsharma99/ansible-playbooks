@@ -1,0 +1,33 @@
+---
+  - name: sample play to lunch ec2 instance
+    hosts: localhost
+    connection: local
+    gather_facts: false
+    tasks:
+      - name: starting ec2 instance
+        ec2:
+          instance_id: i-096ad12285bcba1cf
+          region: ap-south-1
+          wait: yes
+          state: running
+        tags:
+            - start
+            - never
+      - name: starting ec2 instance
+        ec2:
+          instance_id: i-096ad12285bcba1cf
+          region: ap-south-1
+          wait: yes
+          state: stopped
+        tags:
+            - stop
+            - never
+      - name: starting ec2 instance
+        ec2:
+          instance_id: i-096ad12285bcba1cf
+          region: ap-south-1
+          wait: yes
+          state: absent
+        tags:
+            - terminate
+            - never

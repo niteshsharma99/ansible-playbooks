@@ -1,0 +1,11 @@
+---
+  - hosts: localhost
+    gather_facts: true
+    become: true
+    become_method: sudo
+    tasks: 
+      - command: "ls /home/nitesh"
+        register: out
+        failed_when: out.rc==0
+      - debug: 
+          var: out

@@ -1,0 +1,30 @@
+---  
+  - hosts: db
+    gather_facts: true
+    tasks:
+      - block:
+          - name: install httpd web-server 
+            yum:
+              name: httpd
+              state: present
+          - name: start httpd web-server 
+            service:
+              name: httpd
+              state: present
+        when: ansible_os_family == "Redhat"
+        become: true
+        become_method: sudo
+      - block:
+          - name: install apache2 web-server 
+            yum:
+              name: apache2
+              state: present
+          - name: start apache2 web-server 
+            service:
+              name: apache2
+              state: present
+        when: ansible_os_family == "debian"
+        become: true
+        become_method: sudo
+      - debug: 
+          msg: "successfully completed all tasks"

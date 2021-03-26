@@ -1,0 +1,20 @@
+---
+# tasks file for my_roles
+- name: install package if system is Red-Hat/centos
+  yum: 
+    name: "{{item}}"
+    state: present
+  when: ansible_os_family == "RedHat"
+  with_items: 
+    - nginx
+    - httpd
+    - postgresql
+- name: install package if system is Debian/Ubuntu
+  apt:
+    name: "{{item}}"
+    state: present
+  when: ansible_os_family == "Debian"
+  with_items: 
+    - nginx
+    - apache2
+    - postgresql

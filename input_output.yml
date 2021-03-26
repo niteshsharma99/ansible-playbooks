@@ -1,0 +1,23 @@
+---
+ - hosts: localhost
+   vars:
+     x: 45
+     name: "nitrsh"
+   vars_prompt:
+        - name: y
+          prompt: Enter the value of y
+          private: false
+        - name: user_name
+          prompt: Enter your user name
+          private: no
+        - name: password
+          prompt: Enter your password
+          private: yes
+   gather_facts: false
+   tasks:
+   - debug:
+       msg: 
+        - "the x value is: {{x}}"
+        - "the my_name value is: {{name}}"
+        - "the value of y is: {{y}}"
+        - "the username is: {{user_name}} and password is: {{password}}"

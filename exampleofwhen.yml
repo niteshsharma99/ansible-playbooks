@@ -1,0 +1,18 @@
+---
+ - hosts: localhost
+   gather_facts: false
+   become: true
+   become_method: sudo
+   tasks:
+     - name: imstall nginx server
+       package: 
+           name: nginx
+           state: present
+       register: out
+     - debug: 
+          var: out.changed
+     - name: start services
+       service:
+           name: nginx
+           state: started
+       when: out.changed == true

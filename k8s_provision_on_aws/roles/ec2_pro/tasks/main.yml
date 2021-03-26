@@ -1,0 +1,32 @@
+---
+# tasks file for ec2_pro
+- name: "Launching a Miaster node"
+  ec2:
+    key_name: "xyz-key"
+    region: "ap-south-1"
+    instance_type: "t2.micro"
+    image: "ami-0a9d27a9f4f5c0efc"
+    wait: yes
+    group_id: "sg-07a8a5583a1dda317"
+    count: 1
+    vpc_subnet_id: "subnet-3a377c76"
+    assign_public_ip: yes
+    instance_tags:
+            Name: Kube_Master_node
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+- name: "Launching two slave nodes"
+  ec2:
+    key_name: "xyz-key"
+    region: "ap-south-1"
+    instance_type: "t2.micro"
+    image: "ami-0a9d27a9f4f5c0efc"
+    wait: yes
+    group_id: "sg-07a8a5583a1dda317"
+    vpc_subnet_id: "subnet-3a377c76"
+    count: 2
+    instance_tags:
+            Name: Kube_slave_node
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+

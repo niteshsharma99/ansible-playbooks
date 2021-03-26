@@ -1,0 +1,11 @@
+---
+  - hosts: localhost
+    gather_facts: true
+    become: true
+    become_method: sudo
+    tasks: 
+      - command: "ls /home/nitesh"
+        register: out
+      - fail:
+          msg: "Failed because rc is 0"
+        when: out.rc==0

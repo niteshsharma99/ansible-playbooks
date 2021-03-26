@@ -1,0 +1,16 @@
+---
+  - hosts: localhost
+    gather_facts: true
+    become: true
+    become_method: sudo
+    tasks: 
+      - block:
+          - name: Finding files in /home/nitesh
+            command: "ls /home/nitesh"
+            register: nitesh_files
+        rescue: 
+          - debug:
+              msg: "The given path /home/nitesh is not a valid path"
+        always:
+          - debug:
+               msg: "This will execute always"

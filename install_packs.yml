@@ -1,0 +1,20 @@
+---
+ - name: install packages
+   hosts: db
+   gather_facts: no
+   become: yes
+   tasks: 
+   - name: installing web software
+     package: 
+        name=httpd
+        state=present
+
+   - name: deploy web page
+     copy: 
+        content="this is my first website"
+        dest=/var/www/html/index.html
+
+   - name: check the services of httpd server
+     service:
+             name: httpd
+             state: started

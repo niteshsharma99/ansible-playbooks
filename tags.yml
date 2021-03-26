@@ -1,0 +1,34 @@
+---
+  - hosts: localhost
+    tasks:
+      - debug:
+          msg: "This is first task"
+        tags: 
+          - first
+          - always
+          - common
+      - debug:
+          msg: "This is second task"
+        tags: 
+          - second
+      - debug:
+          msg: "This is third task"
+        tags:
+          - third
+          - never
+          - common
+      - debug:
+          msg: "This is fourth task"
+        tags:
+          - fourth
+          - never
+      - debug:
+          msg: "This is fifth task"
+        tags:
+          - fifth
+          - always
+      - debug:
+          msg: "This is six task"
+        tags:
+          - six
+          - never

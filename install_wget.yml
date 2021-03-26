@@ -1,0 +1,16 @@
+---
+ - hosts: db
+   become: yes
+   tasks: 
+   - package:
+            name: wget
+            state: present
+   - yum: name=vim  state=present
+ 
+ - hosts: db_mysql
+   become: yes
+   tasks: 
+   - package:
+           name: httpd
+           state: present
+

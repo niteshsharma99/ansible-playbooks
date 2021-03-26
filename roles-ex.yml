@@ -1,0 +1,9 @@
+---
+  - name: install packages based on os
+    hosts: all
+    become: yes
+    become_method: sudo
+    roles:
+      - my_roles
+
+

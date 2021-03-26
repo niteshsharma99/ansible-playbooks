@@ -1,0 +1,11 @@
+---
+ - hosts: localhost
+   vars_files:
+        - variable_value.yml
+        - variable_values.json
+   tasks:
+   - debug:
+      var: x
+   - debug:
+      var: q
+

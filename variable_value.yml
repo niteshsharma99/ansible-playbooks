@@ -1,0 +1,11 @@
+---
+ x: 45
+ y:
+   - 4
+   - 450
+   - "ansible"
+ pakgs:
+    "Linux": "httpd"
+    "ubuntu": "apache2"
+
+
