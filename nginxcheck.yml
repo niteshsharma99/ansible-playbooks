@@ -1,0 +1,35 @@
+---
+  - name: checking the packages are installed or not if not install them
+    hosts: all
+    become: yes
+    vars:
+     package_names:
+       - apache2
+       - postgresql
+    become_method: sudo
+    gather_facts: false
+    tasks:
+    - name: check packages location
+      command: which {{ item }}
+      with_items:
+          "{{ package_names }}"
+      ignore_errors: true
+    - name: install {{ package_names }}
+      apt: 
+        name: "{{ item }}"
+        state: latest
+      with_items: 
+          "{{ package_names }}"
+      changed_when: true
+    - name: Check if Service Exists
+      command: systemctl status {{ item }}
+      with_items:
+          "{{ package_names }}"
+      ignore_errors: true
+    - service:
+        name: "{{ item }}"
+        state: started
+      with_items:
+          "{{ package_names }}"
+      changed_when: true
+

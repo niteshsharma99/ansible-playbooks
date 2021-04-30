@@ -1,0 +1,23 @@
+---
+  - name: example of debug module
+    hosts: all
+    gather_facts: no
+    become: yes
+    become_method: sudo
+    tasks:
+    - name: use a command
+      command: ls -la /etc/ansible
+      register: output
+    - name: get output 
+      debug:
+        var: output
+    - name: check file exists or not
+      stat: 
+        path: /etc/ansible/nitesh.txt
+      register: file_path
+    - name: if not create new one 
+      file: 
+        path: /etc/ansible/nitesh.txt
+        state: touch
+      when: file_path.stat.exists == False
+    

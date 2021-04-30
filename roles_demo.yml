@@ -1,0 +1,9 @@
+---
+  - name: install nginx using ansible-roles
+    hosts: all
+    become: yes
+    become_method: sudo
+    gather_facts: no
+    roles:
+      - my-roles
+

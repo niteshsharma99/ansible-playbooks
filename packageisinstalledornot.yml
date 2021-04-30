@@ -1,0 +1,21 @@
+---
+  - name: check package
+    hosts: all
+    vars: 
+      package_names:
+        - postgresql
+    gather_facts: true
+    become: true
+    become_method: sudo
+    tasks:
+    - name: "Check if packages is installed or not on Debian Linux family"
+      command: dpkg-query -l "{{ item }}"
+      with_items:
+         "{{ package_names }}"
+      when: ansible_os_family == "Debian"
+
+    - name: "Check if packages is installed or not on Red Hat Linux family"
+      command: rpm -q "{{ item }}"
+      with_items:
+          "{{ package_names }}"
+      when: ansible_os_family == "RedHat"
